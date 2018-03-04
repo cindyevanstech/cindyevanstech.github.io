@@ -24,16 +24,30 @@
   $('body').scrollspy({
     target: '#sideNav'
   });
+  
+  // Set the clicked tab active.
+  $('[data-tab]').on('click', function(ev) {
+    setActive($(ev.target).closest('[data-tab]'));
+  });
 
- $('[data-tab]').on('click', function(ev) {
-  var $target = $(ev.target).closest('li'),
-      tabName = $target.attr('data-tab');
+  // Reset all [data-tabs], and set tab passed in as active
+  function setActive($tab) {
+    var tabName = $tab.attr('data-tab');
 
-  $('[data-control="nav-list"]').find('mynav-item').removeClass('mynav-current');
-  $target.find('div').addClass('mynav-current');
-  $('[data-tab-target]').fadeOut('fast');
-  $('[data-tab-target='+tabName+']').fadeIn('slow');
- })
+    $('[data-control="nav-list"]').find('.mynav-current').removeClass('mynav-current');
+    $tab.find('div').addClass('mynav-current');
+
+    showPage(tabName);
+  }
+
+  // Hide all page panels and show the panel passed in.
+  function showPage(pageName) {
+    $('[data-tab-target]').fadeOut('fast');
+    $('[data-tab-target='+tabName+']').fadeIn('slow');
+  }
+
+  // Set 'about' tab active when page loads.
+  setActive($('[data-tab="about"]'));
 })(jQuery); // End of use strict
 
 function openUrl(url){
