@@ -150,3 +150,14 @@ a:hover, a:focus, a:active {
 .list-no-style{
   list-style: none;
 }
+
+.mynav-item{
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mynav-current {
+  color: rgba(255, 255, 255, 0.7);
+}

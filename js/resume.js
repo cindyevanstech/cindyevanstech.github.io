@@ -28,30 +28,13 @@
  $('[data-tab]').on('click', function(ev) {
   var $target = $(ev.target).closest('li'),
       tabName = $target.attr('data-tab');
+
+  $('[data-control="nav-list"]').find('mynav-item').removeClass('mynav-current');
+  $target.find('div').addClass('mynav-current');
   $('[data-tab-target]').fadeOut('fast');
   $('[data-tab-target='+tabName+']').fadeIn('slow');
  })
- $.fn.textfill = function(options) {
-        var fontSize = options.maxFontPixels;
-        var ourText = $('span:visible:first', this);
-        var maxHeight = $(this).height();
-        var maxWidth = $(this).width();
-        var textHeight;
-        var textWidth;
-        do {
-            ourText.css('font-size', fontSize);
-            textHeight = ourText.height();
-            textWidth = ourText.width();
-            fontSize = fontSize - 1;
-        } while ((textHeight > maxHeight || textWidth > maxWidth) && fontSize > 3);
-        return this;
-    }
-
 })(jQuery); // End of use strict
-
-$(document).ready(function() {
-    $('.autotextsize').textfill({ maxFontPixels: 36 });
-});
 
 function openUrl(url){
   window.open(url, '_blank')
