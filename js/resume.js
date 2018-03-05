@@ -1,6 +1,8 @@
 (function($) {
   "use strict"; // Start of use strict
-
+  $.wait = function( callback, seconds){
+     return window.setTimeout( callback, seconds * 1000 );
+  }
   // Closes responsive menu when a scroll trigger link is clicked
   $('.js-scroll-trigger').click(function() {
     $('.navbar-collapse').collapse('hide');
@@ -10,10 +12,15 @@
   $('body').scrollspy({
     target: '#sideNav'
   });
-  
+  var navready = true
   // Set the clicked tab active.
   $('[data-tab]').on('click', function(ev) {
-    setActive($(ev.target).closest('[data-tab]'));
+    if (navready == true) {
+      navready = false
+      setActive($(ev.target).closest('[data-tab]'));
+    }else
+    return
+    
   });
 
   // Reset all [data-tabs], and set tab passed in as active
@@ -30,6 +37,7 @@
   function showPage(tabName) {
       $('[data-tab-target]').fadeOut(1);
       $('[data-tab-target='+tabName+']').fadeIn('slow');
+      $.wait( function(){navready = true;}, .4);
   }
 
   // Set 'about' tab active when page loads.
